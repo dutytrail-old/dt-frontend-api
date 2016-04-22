@@ -4,16 +4,16 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.dutytrail.service.template</groupId>
-    <artifactId>dt-service-template</artifactId>
+    <groupId>com.dutytrail.forntend.api</groupId>
+    <artifactId>dt-frontend-api</artifactId>
     <version>1.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>Dutytrail - Service Template</name>
+    <name>Dutytrail - Front End API</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <start-class>com.dutytrail.service.template.starter.Template</start-class>
+        <start-class>Api</start-class>
         <java.version>1.8</java.version>
         <feign.version>8.1.1</feign.version>
         <lombok.version>1.16.4</lombok.version>

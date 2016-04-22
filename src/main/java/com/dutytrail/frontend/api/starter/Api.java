@@ -1,4 +1,4 @@
-package com.dutytrail.service.template.starter;
+package com.dutytrail.frontend.api.starter;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -10,12 +10,12 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @EnableAutoConfiguration
 @EnableEurekaClient
-@ComponentScan(basePackages = {"com.dutytrail.service.template"})
-@EnableFeignClients(basePackages = {"com.dutytrail.service.template"})
-public class Template {
+@ComponentScan(basePackages = {"com.dutytrail.forntend.api"})
+@EnableFeignClients(basePackages = {"com.dutytrail.frontend.api"})
+public class Api {
 
     public static void main(String[] args) {
-        SpringApplication.run(Template.class, args);
+        SpringApplication.run(Api.class, args);
     }
 
 }

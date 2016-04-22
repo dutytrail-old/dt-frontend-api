@@ -1,4 +1,4 @@
-package com.dutytrail.service.template.server;
+package com.dutytrail.frontend.api.server;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
@@ -11,14 +11,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class TemplateService {
+public class ApiService {
 
     @Value("${ping.alive}")
     private String configPingAlive;
 
     @RequestMapping("/ping")
     public String ping() {
-        return "Template Service Alive. Profile in use: "+this.configPingAlive;
+        return "Api Front End Alive. Profile in use: "+this.configPingAlive;
     }
 
 }

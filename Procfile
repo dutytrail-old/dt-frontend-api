@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -jar target/dt-service-template-*.jar --spring.profiles.active=heroku
+web: java $JAVA_OPTS -jar target/dt-frontend-api-*.jar --spring.profiles.active=heroku
