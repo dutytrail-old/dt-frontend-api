@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @EnableAutoConfiguration
 @EnableEurekaClient
-@ComponentScan(basePackages = {"com.dutytrail.forntend.api"})
+@ComponentScan(basePackages = {"com.dutytrail.frontend.api"})
 @EnableFeignClients(basePackages = {"com.dutytrail.frontend.api"})
 public class Api {
 
