@@ -1,5 +1,7 @@
 package com.dutytrail.frontend.api.server;
 
+import com.dutytrail.frontend.api.remote.DutyClient;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -16,9 +18,17 @@ public class ApiService {
     @Value("${ping.alive}")
     private String configPingAlive;
 
+    @Autowired
+    DutyClient dutyClient;
+
     @RequestMapping("/ping")
     public String ping() {
         return "Api Front End Alive. Profile in use: "+this.configPingAlive;
+    }
+
+    @RequestMapping("/dutyPing")
+    public String dutyPing() {
+        return "Duty Service says: "+this.dutyClient.ping();
     }
 
 }
