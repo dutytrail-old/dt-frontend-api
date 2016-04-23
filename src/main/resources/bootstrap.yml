@@ -12,6 +12,18 @@ eureka:
     serviceUrl:
       defaultZone: ${EUREKA_URL}/eureka/
 
+feign:
+  histrix:
+    enabled: false
+
+hystrix:
+  command:
+    choose:
+      default:
+        execution:
+          timeout:
+            enabled: false
+
 spring:
   application:
     name: dtfrontendapi
