@@ -25,7 +25,7 @@ public class Api {
 
     private static void configureHystrix() {
         for (Method method : ApiService.class.getMethods()) {
-            ConfigurationManager.getConfigInstance().setProperty(String.format("hystrix.command.%s.execution.isolation.thread.timeoutInMilliseconds", method.getName()), 150000);
+            ConfigurationManager.getConfigInstance().setProperty(String.format("hystrix.command.%s.execution.isolation.thread.timeoutInMilliseconds", method.getName()), 1500000);
         }
     }
 
