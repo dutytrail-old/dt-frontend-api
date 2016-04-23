@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @FeignClient("dtserviceduty")
 public interface DutyClient {
 
-    @RequestMapping(method = RequestMethod.GET, value = "/ping", produces = "application/json")
+    @RequestMapping(method = RequestMethod.GET, value = "/pinga", produces = "application/json")
     String ping();
 
 }
