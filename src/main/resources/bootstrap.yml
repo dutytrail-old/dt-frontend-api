@@ -21,8 +21,3 @@ spring:
     config:
       profile: ${ARCH_ENV}
       uri: ${CONF_URI:https://dt-arch-conf.herokuapp.com}
-
-hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 6000000
-ribbon:
-  ConnectTimeout: 300000
-  ReadTimeout: 6000000
