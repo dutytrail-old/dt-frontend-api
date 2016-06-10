@@ -14,7 +14,7 @@ eureka:
 
 spring:
   application:
-    name: dtfrontendapi
+    name: dt-frontend-api.herokuapp.com
   profiles:
     active: ${ARCH_ENV}
   cloud:
