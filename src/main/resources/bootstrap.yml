@@ -2,12 +2,12 @@ server:
   port: ${PORT:0}
 
 eureka:
-  instance:
-    preferIpAddress: true
-    nonSecurePort: ${PORT:0}
-    hostname: ${DOMAIN:localhost}
-    metadataMap:
-      instanceId: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+#  instance:
+#    preferIpAddress: true
+#    nonSecurePort: ${PORT:0}
+#    hostname: ${DOMAIN:localhost}
+#    metadataMap:
+#      instanceId: ${spring.application.name}:${spring.application.instance_id:${random.value}}
   client:
     serviceUrl:
       defaultZone: ${EUREKA_URL}/eureka/
