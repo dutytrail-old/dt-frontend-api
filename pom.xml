@@ -15,7 +15,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <start-class>com.dutytrail.frontend.api.starter.Api</start-class>
         <java.version>1.8</java.version>
-        <feign.version>8.1.1</feign.version>
+        <feign.version>8.17.0</feign.version>
         <lombok.version>1.16.4</lombok.version>
         <java.version>1.8</java.version>
         <spring-cloud.version>1.0.3.RELEASE</spring-cloud.version>
@@ -105,6 +105,11 @@
             <dependency>
                 <groupId>com.netflix.feign</groupId>
                 <artifactId>feign-jackson</artifactId>
+                <version>${feign.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.netflix.feign</groupId>
+                <artifactId>feign-core</artifactId>
                 <version>${feign.version}</version>
             </dependency>
             <dependency>
