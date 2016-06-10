@@ -2,10 +2,10 @@ server:
   port: ${PORT:0}
 
 eureka:
-#  instance:
-#    preferIpAddress: true
-#    nonSecurePort: ${PORT:0}
-#    hostname: ${DOMAIN:localhost}
+  instance:
+    preferIpAddress: false
+    nonSecurePort: ${PORT:0}
+    hostname: ${DOMAIN:localhost}
 #    metadataMap:
 #      instanceId: ${spring.application.name}:${spring.application.instance_id:${random.value}}
   client:
