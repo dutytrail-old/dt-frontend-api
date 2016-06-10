@@ -3,7 +3,7 @@ server:
 
 eureka:
   instance:
-    preferIpAddress: false
+    preferIpAddress: true
     nonSecurePort: ${PORT:0}
     hostname: ${DOMAIN:localhost}
 #    metadataMap:
