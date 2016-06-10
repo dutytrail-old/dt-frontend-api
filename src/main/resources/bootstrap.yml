@@ -6,8 +6,8 @@ eureka:
     preferIpAddress: false
     nonSecurePort: ${PORT:0}
     hostname: ${DOMAIN:localhost}
-    metadataMap:
-      instanceId: ${spring.application.name}
+#    metadataMap:
+#      instanceId: ${spring.application.name}
   client:
     serviceUrl:
       defaultZone: ${EUREKA_URL}/eureka/
