@@ -1,6 +1,7 @@
 package com.dutytrail.frontend.api.server;
 
 import com.dutytrail.frontend.api.remote.DutyClient;
+import com.dutytrail.frontend.api.remote.TrailClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
@@ -21,6 +22,9 @@ public class ApiService {
     @Autowired
     DutyClient dutyClient;
 
+    @Autowired
+    TrailClient trailClient;
+
     @RequestMapping("/ping")
     public String ping() {
         return "Api Front End Alive. Profile in use: "+this.configPingAlive;
@@ -29,6 +33,11 @@ public class ApiService {
     @RequestMapping("/dutyPing")
     public String dutyPing() {
         return "Duty Service says: "+this.dutyClient.ping();
+    }
+
+    @RequestMapping("/trailPing")
+    public String trailPing() {
+        return "Trail Service says: "+this.trailClient.ping();
     }
 
 }
