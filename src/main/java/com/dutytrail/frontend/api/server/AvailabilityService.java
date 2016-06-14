@@ -1,5 +1,6 @@
 package com.dutytrail.frontend.api.server;
 
+import com.dutytrail.frontend.api.entity.ApiOutput;
 import com.dutytrail.frontend.api.entity.Status;
 import com.dutytrail.frontend.api.remote.DutyClient;
 import com.dutytrail.frontend.api.remote.TrailClient;
@@ -19,13 +20,13 @@ public class AvailabilityService {
     @Autowired private TrailClient trailClient;
 
     @RequestMapping(value = "/ping", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON)
-    public String ping() {
-        return "Api Front End Alive. Profile in use: "+this.configPingAlive;
+    public ApiOutput ping() {
+        return new ApiOutput("Api Front End Alive. Profile in use: "+this.configPingAlive);
     }
 
     @RequestMapping(value = "/status", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON)
-    public Status status() {
-        return new Status(this.dutyClient.ping(), this.trailClient.ping(), this.configPingAlive);
+    public ApiOutput status() {
+        return new ApiOutput(new Status(this.dutyClient.ping(), this.trailClient.ping(), this.configPingAlive));
     }
 
 }

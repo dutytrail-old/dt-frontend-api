@@ -1,13 +1,32 @@
 package com.dutytrail.frontend.api.remote;
 
+import com.dutytrail.frontend.api.entity.Duty;
+import com.dutytrail.frontend.api.entity.DutyInput;
 import org.springframework.cloud.netflix.feign.FeignClient;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import javax.ws.rs.core.MediaType;
+import java.util.ArrayList;
 
 @FeignClient(serviceId = "${dtserviceduty.name}", url = "${dtserviceduty.url}")
 public interface DutyClient {
 
-    @RequestMapping(method = RequestMethod.GET, value = "/ping", produces = "application/json")
+    @RequestMapping(method = RequestMethod.GET, value = "/ping", produces = MediaType.APPLICATION_JSON)
     String ping();
+
+    @RequestMapping(method = RequestMethod.GET, value = "/duty/{dutyId}", produces = MediaType.APPLICATION_JSON)
+    Duty duty(@PathVariable("dutyId") String dutyId);
+
+    @RequestMapping(method = RequestMethod.GET, value = "/list/duty/{userId}", produces = MediaType.APPLICATION_JSON)
+    ArrayList<Duty> listDuty(@PathVariable("userId") String userId);
+
+    @RequestMapping(method = RequestMethod.POST, value = "/duty", produces = MediaType.APPLICATION_JSON, consumes = MediaType.APPLICATION_JSON)
+    Long postDuty(@RequestBody DutyInput dutyInput);
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "/duty/{dutyId}", produces = MediaType.APPLICATION_JSON)
+    Long deleteDuty(@PathVariable("dutyId") Long dutyId);
 
 }

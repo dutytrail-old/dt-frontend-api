@@ -4,15 +4,15 @@ import javax.xml.bind.annotation.*;
 
 @XmlRootElement(name = "ApiOutput")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(propOrder = {"message"})
+@XmlType(propOrder = {"content"})
 public class ApiOutput {
-    @XmlElement(name = "message") private String message;
+    @XmlElement(name = "content") private Object content;
 
-    public ApiOutput(String message) {
-        this.message = message;
+    public ApiOutput(Object content) {
+        this.content = content;
     }
 
-    public String getMessage() {
-        return message;
+    public Object getContent() {
+        return content;
     }
 }
