@@ -1,7 +1,6 @@
 package com.dutytrail.frontend.api.remote;
 
-import com.dutytrail.frontend.api.entity.Duty;
-import com.dutytrail.frontend.api.entity.DutyInput;
+import com.dutytrail.frontend.api.remote.entity.Duty;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,7 +23,7 @@ public interface DutyClient {
     ArrayList<Duty> listDuty(@PathVariable("userId") String userId);
 
     @RequestMapping(method = RequestMethod.POST, value = "/duty", produces = MediaType.APPLICATION_JSON, consumes = MediaType.APPLICATION_JSON)
-    Long postDuty(@RequestBody DutyInput dutyInput);
+    Long postDuty(@RequestBody String name);
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/duty/{dutyId}", produces = MediaType.APPLICATION_JSON)
     Long deleteDuty(@PathVariable("dutyId") Long dutyId);

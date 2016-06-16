@@ -1,22 +1,33 @@
 package com.dutytrail.frontend.api.entity;
 
+import com.dutytrail.frontend.api.remote.entity.Trail;
+
 import javax.xml.bind.annotation.*;
+import java.util.List;
 
 @XmlRootElement(name = "Duty")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(propOrder = {"id","name"})
 public class Duty {
 
-    @XmlElement(name = "id") private Long id;
-    @XmlElement(name = "name") private String name;
+    @XmlElement(name = "id")
+    private Long id;
+
+    @XmlElement(name = "name")
+    private String name;
+
+    @XmlElementWrapper(name = "Trails")
+    @XmlElement(name = "Trail")
+    private List<Trail> trails;
 
     public Duty() {
 
     }
 
-    public Duty(Long id, String name) {
+    public Duty(Long id, String name, List<Trail> trails) {
         this.id = id;
         this.name = name;
+        this.trails = trails;
     }
 
     public String getName() {
@@ -25,5 +36,9 @@ public class Duty {
 
     public Long getId() {
         return id;
+    }
+
+    public List<Trail> getTrails() {
+        return trails;
     }
 }
