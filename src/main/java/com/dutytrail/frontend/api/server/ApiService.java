@@ -4,6 +4,7 @@ import com.dutytrail.frontend.api.entity.ApiOutput;
 import com.dutytrail.frontend.api.entity.DutyInput;
 import com.dutytrail.frontend.api.remote.DutyClient;
 import com.dutytrail.frontend.api.remote.TrailClient;
+import com.dutytrail.frontend.api.remote.entity.Duty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
