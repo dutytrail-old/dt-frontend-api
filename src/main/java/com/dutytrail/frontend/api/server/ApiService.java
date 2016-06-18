@@ -5,6 +5,7 @@ import com.dutytrail.frontend.api.entity.DutyInput;
 import com.dutytrail.frontend.api.remote.DutyClient;
 import com.dutytrail.frontend.api.remote.TrailClient;
 import com.dutytrail.frontend.api.remote.entity.Duty;
+import com.dutytrail.frontend.api.remote.entity.Trail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,7 +29,8 @@ public class ApiService {
 
     @RequestMapping(value = "/duty/{dutyId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON)
     public ApiOutput getDuty(@PathVariable("dutyId") String dutyId) {
-        return new ApiOutput(this.dutyClient.duty(dutyId));
+        Duty duty = this.dutyClient.duty(dutyId);
+        return new ApiOutput(new com.dutytrail.frontend.api.entity.Duty(duty.getId(), duty.getName(), this.trailClient.getTrail(duty.getId())));
     }
 
     @RequestMapping(value = "/duty", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON, consumes = MediaType.APPLICATION_JSON)
@@ -43,9 +45,9 @@ public class ApiService {
         return new ApiOutput("Deleted duty: " + this.dutyClient.deleteDuty(Long.valueOf(dutyId)));
     }
 
-    @RequestMapping(value = "/duty/{dutyId}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON)
-    public ApiOutput putDuty(@PathVariable("dutyId") String taskId) {
-        return new ApiOutput("Putting duty "+taskId);
+    @RequestMapping(value = "/duty/{userId}/{dutyId}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON)
+    public ApiOutput putDuty(@PathVariable("userId") String userId, @PathVariable("dutyId") String dutyId) {
+        return new ApiOutput("Putting duty "+this.trailClient.postTrail(Long.valueOf(userId), Long.valueOf(dutyId),"done"));
     }
 
 }
