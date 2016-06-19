@@ -1,0 +1,16 @@
+server:
+  port: 9999
+
+eureka:
+  enabled: false
+
+ping:
+  alive: Config properties loaded from LOCAL profile
+
+dtserviceduty:
+  name: dtserviceduty
+  url: dt-service-duty.herokuapp.com
+
+dtservicetrail:
+  name: dtservicetrail
+  url: dt-service-trail.herokuapp.com
