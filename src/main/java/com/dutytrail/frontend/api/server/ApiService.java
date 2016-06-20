@@ -23,14 +23,15 @@ public class ApiService {
     @RequestMapping(value = "/duty/list/{userId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON)
     public ApiOutput listDuty(@PathVariable("userId") String userId) {
         List<com.dutytrail.frontend.api.entity.Duty> apiDutys = new ArrayList<>();
-        apiDutys.addAll(this.dutyClient.listDuty(userId).stream().map(duty -> new com.dutytrail.frontend.api.entity.Duty(duty.getId(), duty.getName(), this.trailClient.getTrail(duty.getId()))).collect(Collectors.toList()));
+        apiDutys.addAll(this.dutyClient.listDuty(userId).stream().map(duty -> new com.dutytrail.frontend.api.entity.Duty(duty.getId(), duty.getName(), this.marshallRemoteTrail(this.trailClient.getTrail(duty.getId())))).collect(Collectors.toList()));
         return new ApiOutput(apiDutys);
     }
 
     @RequestMapping(value = "/duty/{dutyId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON)
     public ApiOutput getDuty(@PathVariable("dutyId") String dutyId) {
         Duty duty = this.dutyClient.duty(dutyId);
-        return new ApiOutput(new com.dutytrail.frontend.api.entity.Duty(duty.getId(), duty.getName(), this.trailClient.getTrail(duty.getId())));
+        List<Trail> remoteTrail = this.trailClient.getTrail(duty.getId());
+        return new ApiOutput(new com.dutytrail.frontend.api.entity.Duty(duty.getId(), duty.getName(), this.marshallRemoteTrail(remoteTrail)));
     }
 
     @RequestMapping(value = "/duty", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON, consumes = MediaType.APPLICATION_JSON)
@@ -48,6 +49,10 @@ public class ApiService {
     @RequestMapping(value = "/duty/{userId}/{dutyId}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON)
     public ApiOutput putDuty(@PathVariable("userId") String userId, @PathVariable("dutyId") String dutyId) {
         return new ApiOutput("Putting duty "+this.trailClient.postTrail(Long.valueOf(userId), Long.valueOf(dutyId),"done"));
+    }
+
+    private List<com.dutytrail.frontend.api.entity.Trail> marshallRemoteTrail(List<Trail> remoteTrails){
+        return remoteTrails.stream().map(remoteTrail -> new com.dutytrail.frontend.api.entity.Trail(remoteTrail.getUserId(), remoteTrail.getStatus(), remoteTrail.getTimestamp())).collect(Collectors.toList());
     }
 
 }

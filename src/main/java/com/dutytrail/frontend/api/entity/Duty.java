@@ -1,7 +1,5 @@
 package com.dutytrail.frontend.api.entity;
 
-import com.dutytrail.frontend.api.remote.entity.Trail;
-
 import javax.xml.bind.annotation.*;
 import java.util.List;
 
