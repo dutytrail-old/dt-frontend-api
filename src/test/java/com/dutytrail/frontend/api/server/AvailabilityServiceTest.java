@@ -38,7 +38,7 @@ public class AvailabilityServiceTest {
         Assert.assertNotNull(statusResponseEntity);
         Status status = statusResponseEntity.getBody();
         Assert.assertNotNull(status);
-        Assert.assertEquals("Config properties loaded from LOCAL profile", status.getConfigPing());
+        Assert.assertEquals("Config properties loaded from HEROKU profile", status.getConfigPing());
         Assert.assertEquals("Duty Service Alive. Profile in use: Config properties loaded from HEROKU profile", status.getDutyServicePing());
         Assert.assertEquals("Trail Service Alive. Profile in use: Config properties loaded from HEROKU profile", status.getTrailServicePing());
     }

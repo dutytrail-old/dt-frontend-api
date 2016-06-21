@@ -50,9 +50,9 @@ public class ApiService {
         return new ApiOutput("Subscribed duty "+ dutyId + " with response "+ this.subscribeDuty(userId, dutyId));
     }
 
-    @RequestMapping(value = "/duty/{dutyId}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON)
-    public synchronized ApiOutput deleteDuty(@PathVariable("dutyId") String dutyId) {
-        return new ApiOutput("Deleted duty: " + this.dutyClient.deleteDuty(Long.valueOf(dutyId)));
+    @RequestMapping(value = "/duty/{userId}/{dutyId}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON)
+    public synchronized ApiOutput deleteDuty(@PathVariable("userId") String userId, @PathVariable("dutyId") String dutyId) {
+        return new ApiOutput("The user: "+userId+" is now un subscribed to the duty with id: "+dutyId+" with duty service response: " + this.dutyClient.unsubscribe(Long.valueOf(userId), Long.valueOf(dutyId)));
     }
 
     @RequestMapping(value = "/duty/{userId}/{dutyId}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON)
