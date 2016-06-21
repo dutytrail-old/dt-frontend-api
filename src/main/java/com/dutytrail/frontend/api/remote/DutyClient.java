@@ -31,6 +31,9 @@ public interface DutyClient {
     @RequestMapping(method = RequestMethod.DELETE, value = "/unsubscribe/{userId}/{dutyId}", produces = MediaType.APPLICATION_JSON, consumes = MediaType.APPLICATION_JSON)
     Long unsubscribe(@PathVariable("userId") Long userId, @PathVariable("dutyId") Long dutyId);
 
+    @RequestMapping(method = RequestMethod.GET, value = "/is/subscribed/{userId}/{dutyId}", produces = MediaType.APPLICATION_JSON)
+    Boolean isSubscribed(@PathVariable("userId") Long userId, @PathVariable("dutyId") Long dutyId);
+
     @RequestMapping(method = RequestMethod.DELETE, value = "/duty/{dutyId}", produces = MediaType.APPLICATION_JSON)
     Long deleteDuty(@PathVariable("dutyId") Long dutyId);
 

@@ -2,6 +2,7 @@ package com.dutytrail.frontend.api.server;
 
 import com.dutytrail.frontend.api.entity.ApiOutput;
 import com.dutytrail.frontend.api.entity.DutyInput;
+import com.dutytrail.frontend.api.exception.ApiException;
 import com.dutytrail.frontend.api.remote.DutyClient;
 import com.dutytrail.frontend.api.remote.TrailClient;
 import com.dutytrail.frontend.api.remote.entity.Duty;
@@ -56,8 +57,11 @@ public class ApiService {
     }
 
     @RequestMapping(value = "/duty/{userId}/{dutyId}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON)
-    public synchronized ApiOutput putDuty(@PathVariable("userId") String userId, @PathVariable("dutyId") String dutyId) {
-        return new ApiOutput("Putting duty "+this.trailClient.postTrail(Long.valueOf(userId), Long.valueOf(dutyId),"done"));
+    public synchronized ApiOutput putDuty(@PathVariable("userId") String userId, @PathVariable("dutyId") String dutyId) throws ApiException {
+        if(this.dutyClient.isSubscribed(Long.valueOf(userId), Long.valueOf(dutyId))) {
+            return new ApiOutput("Putting duty " + this.trailClient.postTrail(Long.valueOf(userId), Long.valueOf(dutyId), "done"));
+        }
+        throw new ApiException();
     }
 
     private List<com.dutytrail.frontend.api.entity.Trail> marshallRemoteTrail(List<Trail> remoteTrails){
