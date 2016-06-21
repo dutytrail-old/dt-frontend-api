@@ -23,7 +23,7 @@ public class ApiService {
     @RequestMapping(value = "/duty/list/{userId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON)
     public ApiOutput listDuty(@PathVariable("userId") String userId) {
         List<com.dutytrail.frontend.api.entity.Duty> apiDutys = new ArrayList<>();
-        apiDutys.addAll(this.dutyClient.listDuty(userId).stream().map(duty -> new com.dutytrail.frontend.api.entity.Duty(duty.getId(), duty.getName(), this.marshallRemoteTrail(this.trailClient.getTrail(duty.getId())))).collect(Collectors.toList()));
+        apiDutys.addAll(this.dutyClient.listDuty(userId).stream().map(duty -> new com.dutytrail.frontend.api.entity.Duty(duty.getId(), duty.getName(), duty.getSubscriptions(), this.marshallRemoteTrail(this.trailClient.getTrail(duty.getId())))).collect(Collectors.toList()));
         return new ApiOutput(apiDutys);
     }
 
@@ -31,23 +31,23 @@ public class ApiService {
     public ApiOutput getDuty(@PathVariable("dutyId") String dutyId) {
         Duty duty = this.dutyClient.duty(dutyId);
         List<Trail> remoteTrail = this.trailClient.getTrail(duty.getId());
-        return new ApiOutput(new com.dutytrail.frontend.api.entity.Duty(duty.getId(), duty.getName(), this.marshallRemoteTrail(remoteTrail)));
+        return new ApiOutput(new com.dutytrail.frontend.api.entity.Duty(duty.getId(), duty.getName(), duty.getSubscriptions(), this.marshallRemoteTrail(remoteTrail)));
     }
 
     @RequestMapping(value = "/duty", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON, consumes = MediaType.APPLICATION_JSON)
-    public ApiOutput postDuty(@RequestBody DutyInput dutyInput) {
-        Long dutyId = this.dutyClient.postDuty(dutyInput.getName());
+    public synchronized ApiOutput postDuty(@RequestBody DutyInput dutyInput) {
+        Long dutyId = this.dutyClient.postDuty(String.valueOf(dutyInput.getUserId())+"#"+dutyInput.getName());
         String postedTrail = ". Posted initial trail for duty "+ dutyInput.getName() + " with id "+this.trailClient.postTrail(dutyInput.getUserId(), dutyId,"created");
         return new ApiOutput("Posted duty "+ dutyInput.getName() + " with id "+dutyId+postedTrail);
     }
 
     @RequestMapping(value = "/duty/{dutyId}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON)
-    public ApiOutput deleteDuty(@PathVariable("dutyId") String dutyId) {
+    public synchronized ApiOutput deleteDuty(@PathVariable("dutyId") String dutyId) {
         return new ApiOutput("Deleted duty: " + this.dutyClient.deleteDuty(Long.valueOf(dutyId)));
     }
 
     @RequestMapping(value = "/duty/{userId}/{dutyId}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON)
-    public ApiOutput putDuty(@PathVariable("userId") String userId, @PathVariable("dutyId") String dutyId) {
+    public synchronized ApiOutput putDuty(@PathVariable("userId") String userId, @PathVariable("dutyId") String dutyId) {
         return new ApiOutput("Putting duty "+this.trailClient.postTrail(Long.valueOf(userId), Long.valueOf(dutyId),"done"));
     }
 

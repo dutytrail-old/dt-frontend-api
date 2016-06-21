@@ -23,7 +23,7 @@ public interface DutyClient {
     ArrayList<Duty> listDuty(@PathVariable("userId") String userId);
 
     @RequestMapping(method = RequestMethod.POST, value = "/duty", produces = MediaType.APPLICATION_JSON, consumes = MediaType.APPLICATION_JSON)
-    Long postDuty(@RequestBody String name);
+    Long postDuty(@RequestBody String userIdHashName);
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/duty/{dutyId}", produces = MediaType.APPLICATION_JSON)
     Long deleteDuty(@PathVariable("dutyId") Long dutyId);
