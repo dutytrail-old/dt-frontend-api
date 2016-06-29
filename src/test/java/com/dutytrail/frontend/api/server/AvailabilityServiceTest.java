@@ -6,6 +6,7 @@ import com.dutytrail.frontend.api.remote.TrailClient;
 import com.dutytrail.frontend.api.starter.Api;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -33,6 +34,7 @@ public class AvailabilityServiceTest {
     }
 
     @Test
+    @Ignore
     public void statusTest(){
         ResponseEntity<Status> statusResponseEntity = restTemplate.getForEntity("http://localhost:9999/status", Status.class);
         Assert.assertNotNull(statusResponseEntity);

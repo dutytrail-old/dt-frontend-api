@@ -7,6 +7,10 @@ import com.dutytrail.frontend.api.remote.DutyClient;
 import com.dutytrail.frontend.api.remote.TrailClient;
 import com.dutytrail.frontend.api.remote.entity.Duty;
 import com.dutytrail.frontend.api.remote.entity.Trail;
+import com.wordnik.swagger.annotations.Api;
+import com.wordnik.swagger.annotations.ApiOperation;
+import com.wordnik.swagger.annotations.ApiResponse;
+import com.wordnik.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,11 +20,17 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
+@Api(value = "/", description = "API for Dutytrail")
 public class ApiService {
 
     @Autowired private DutyClient dutyClient;
     @Autowired private TrailClient trailClient;
 
+    @ApiOperation(value = "Retrieve the list of duties", notes = "This operation returns all the duties on the system, without taking into account the users.", response = ApiOutput.class)
+    @ApiResponses(value= {
+            @ApiResponse(code = 200, message = "Duty List OK"),
+            @ApiResponse(code = 404, message = "Resource not found")
+    })
     @RequestMapping(value = "/duty/list", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON)
     public ApiOutput listDuty() {
         return new ApiOutput(this.getDuties(null));
@@ -62,6 +72,16 @@ public class ApiService {
             return new ApiOutput("Putting duty " + this.trailClient.postTrail(Long.valueOf(userId), Long.valueOf(dutyId), "done"));
         }
         throw new ApiException();
+    }
+
+    @RequestMapping(value = "/duty/{userId}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON)
+    public synchronized ApiOutput deleteDutyCascade(@PathVariable("userId") String userId) {
+        List<Duty> dutiesToBeDeleted = this.dutyClient.listDuty(userId);
+        for(Duty duty : dutiesToBeDeleted){
+            this.dutyClient.deleteCascade(duty.getId());
+            this.trailClient.delete(duty.getId());
+        }
+        return new ApiOutput("All duties deleted for user "+userId);
     }
 
     private List<com.dutytrail.frontend.api.entity.Trail> marshallRemoteTrail(List<Trail> remoteTrails){

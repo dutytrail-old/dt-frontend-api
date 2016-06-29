@@ -21,4 +21,7 @@ public interface TrailClient {
     @RequestMapping(method = RequestMethod.GET, value = "/trail/{dutyId}", produces = MediaType.APPLICATION_JSON)
     ArrayList<Trail> getTrail(@PathVariable("dutyId") Long dutyId);
 
+    @RequestMapping(method = RequestMethod.DELETE, value = "/trail/{dutyId}", produces = MediaType.APPLICATION_JSON)
+    Long delete(@PathVariable("dutyId") Long dutyId);
+
 }

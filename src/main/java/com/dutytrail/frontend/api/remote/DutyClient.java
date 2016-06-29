@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import java.util.ArrayList;
 
@@ -36,5 +37,8 @@ public interface DutyClient {
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/duty/{dutyId}", produces = MediaType.APPLICATION_JSON)
     Long deleteDuty(@PathVariable("dutyId") Long dutyId);
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "/duty/cascade/{dutyId}", produces = MediaType.APPLICATION_JSON)
+    Long deleteCascade(@PathVariable("dutyId") Long dutyId);
 
 }
