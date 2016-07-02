@@ -4,7 +4,7 @@ server:
 eureka:
   instance:
     preferIpAddress: false
-    nonSecurePort: ${PORT:0}
+    nonSecurePort: ${PORT:9999}
     hostname: ${DOMAIN:localhost}
   client:
     serviceUrl:
