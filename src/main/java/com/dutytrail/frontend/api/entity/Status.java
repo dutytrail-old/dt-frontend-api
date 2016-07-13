@@ -10,10 +10,6 @@ public class Status{
     @XmlElement(name = "trail") private String trailServicePing;
     @XmlElement(name = "config") private String configPing;
 
-    public Status(){
-
-    }
-
     public Status(String dutyServicePing, String trailServicePing, String configPing) {
         this.dutyServicePing = dutyServicePing;
         this.trailServicePing = trailServicePing;

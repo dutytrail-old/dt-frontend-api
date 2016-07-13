@@ -24,10 +24,6 @@ public class Duty {
     @XmlElement(name = "Trail")
     private List<Trail> trails;
 
-    public Duty() {
-
-    }
-
     public Duty(Long id, String name, List<User> subscriptions, List<Trail> trails) {
         this.id = id;
         this.name = name;

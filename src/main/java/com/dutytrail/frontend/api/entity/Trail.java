@@ -13,10 +13,6 @@ public class Trail {
     @XmlElement(name = "status") private String status;
     @XmlElement(name = "date") private String date;
 
-    public Trail() {
-
-    }
-
     public Trail(Long userId, String status, Timestamp timestamp) {
         this.userId = userId;
         this.status = status;
