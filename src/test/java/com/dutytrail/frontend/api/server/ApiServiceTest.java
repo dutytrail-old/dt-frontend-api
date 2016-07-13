@@ -146,10 +146,4 @@ public class ApiServiceTest {
         this.apiService.putDuty("1", "1");
     }
 
-    @Test
-    public void deleteDutyCascadeTest(){
-        ApiOutput apiOutput = this.apiService.deleteDutyCascade("1");
-        Assert.assertNotNull(apiOutput);
-    }
-
 }

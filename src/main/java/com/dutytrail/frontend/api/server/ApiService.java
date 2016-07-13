@@ -74,16 +74,6 @@ public class ApiService {
         throw new ApiException();
     }
 
-    @RequestMapping(value = "/duty/{userId}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON)
-    public synchronized ApiOutput deleteDutyCascade(@PathVariable("userId") String userId) {
-        List<Duty> dutiesToBeDeleted = this.dutyClient.listDuty(userId);
-        for(Duty duty : dutiesToBeDeleted){
-            this.dutyClient.deleteCascade(duty.getId());
-            this.trailClient.delete(duty.getId());
-        }
-        return new ApiOutput("All duties deleted for user "+userId);
-    }
-
     private List<com.dutytrail.frontend.api.entity.Trail> marshallRemoteTrail(List<Trail> remoteTrails){
         return remoteTrails.stream().map(remoteTrail -> new com.dutytrail.frontend.api.entity.Trail(remoteTrail.getUserId(), remoteTrail.getStatus(), remoteTrail.getTimestamp())).collect(Collectors.toList());
     }
